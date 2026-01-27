@@ -9,6 +9,7 @@ interface MenuPageProps {
   previousDish?: Dish; 
   cart: CartState;
   onUpdateQuantity: (id: string, delta: number) => void;
+  onAddCustomDish?: (name: string, description: string) => void;
   pageNumber: number;
   language: Language;
   onLanguageChange: (lang: Language) => void;
@@ -19,6 +20,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
   previousDish,
   cart,
   onUpdateQuantity,
+  onAddCustomDish,
   pageNumber,
   language,
   onLanguageChange,
@@ -26,8 +28,6 @@ export const MenuPage: React.FC<MenuPageProps> = ({
   const t = TRANSLATIONS[language];
 
   // Manual Column Split for Desktop
-  // We split the dishes into two arrays to manually control the column layout.
-  // This allows us to deterministically place headers at the top of the second column.
   const { leftCol, rightCol } = useMemo(() => {
     const mid = Math.ceil(dishes.length / 2);
     return {
@@ -46,7 +46,6 @@ export const MenuPage: React.FC<MenuPageProps> = ({
   ): HeaderType => {
     // 1. First Item of the Page (Top Left)
     if (colType === 'left' && index === 0) {
-      // If same cuisine as the last dish of the PREVIOUS page -> Subtle page continuation header
       if (prevContextDish && prevContextDish.cuisine === dish.cuisine) {
         return 'subtle-page';
       }
@@ -55,7 +54,6 @@ export const MenuPage: React.FC<MenuPageProps> = ({
 
     // 2. First Item of the Right Column (Top Right)
     if (colType === 'right' && index === 0) {
-      // If same cuisine as the bottom of the LEFT column -> Subtle column continuation header
       if (prevContextDish && prevContextDish.cuisine === dish.cuisine) {
         return 'subtle-column';
       }
@@ -63,7 +61,6 @@ export const MenuPage: React.FC<MenuPageProps> = ({
     }
 
     // 3. Inner Items
-    // If cuisine changes from the previous item in the SAME list -> Standard Header
     if (index > 0 && list[index - 1].cuisine !== dish.cuisine) {
       return 'standard';
     }
@@ -126,6 +123,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
                 headerType={getHeaderType(dish, index, 'left', leftCol, previousDish)}
                 quantity={cart[dish.id] || 0}
                 onUpdateQuantity={onUpdateQuantity}
+                onAddCustomDish={onAddCustomDish}
                 language={language}
               />
             ))}
@@ -146,6 +144,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
                 )}
                 quantity={cart[dish.id] || 0}
                 onUpdateQuantity={onUpdateQuantity}
+                onAddCustomDish={onAddCustomDish}
                 language={language}
               />
             ))}

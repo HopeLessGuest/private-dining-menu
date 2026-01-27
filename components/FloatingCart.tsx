@@ -1,43 +1,78 @@
-import React, { useState } from 'react';
-import { ShoppingCart, X, Trash2, Send } from 'lucide-react';
-import { Dish, CartState, Language } from '../types';
+import React, { useState, useMemo } from 'react';
+import { ShoppingCart, X, Trash2, Send, MessageSquareText, Check } from 'lucide-react';
+import { Dish, CartState, Language, NoteState } from '../types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TRANSLATIONS } from '../constants';
 
 interface FloatingCartProps {
   cart: CartState;
+  cartNotes: NoteState;
   dishes: Dish[];
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
   onClear: () => void;
   onUpdateQuantity: (id: string, delta: number) => void;
+  onUpdateNote: (id: string, note: string) => void;
   onPlaceOrder: () => void;
   language: Language;
 }
 
 export const FloatingCart: React.FC<FloatingCartProps> = ({
   cart,
+  cartNotes,
   dishes,
+  isOpen,
+  setIsOpen,
   onClear,
   onUpdateQuantity,
+  onUpdateNote,
   onPlaceOrder,
   language,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
+  const [tempNote, setTempNote] = useState('');
   const t = TRANSLATIONS[language];
 
   // Derive cart items
-  const cartItems = (Object.entries(cart) as [string, number][])
-    .filter(([_, qty]) => qty > 0)
-    .map(([id, qty]) => {
-      const dish = dishes.find((d) => d.id === id);
-      return dish ? { ...dish, quantity: qty } : null;
-    })
-    .filter((item): item is (Dish & { quantity: number }) => item !== null);
+  const cartItems = useMemo(() => {
+    return (Object.entries(cart) as [string, number][])
+      .filter(([_, qty]) => qty > 0)
+      .map(([id, qty]) => {
+        const dish = dishes.find((d) => d.id === id);
+        return dish ? { ...dish, quantity: qty } : null;
+      })
+      .filter((item): item is (Dish & { quantity: number }) => item !== null);
+  }, [cart, dishes]);
 
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+  // Calculate Cuisine Stats
+  const cuisineStats = useMemo(() => {
+    const stats: Record<string, number> = {};
+    cartItems.forEach(item => {
+      stats[item.cuisine] = (stats[item.cuisine] || 0) + item.quantity;
+    });
+    return stats;
+  }, [cartItems]);
 
   const handleSend = () => {
     onPlaceOrder();
     setIsOpen(false);
+  };
+
+  const startEditingNote = (id: string, currentNote: string) => {
+    if (editingNoteId === id) {
+      // Close without saving
+      setEditingNoteId(null);
+    } else {
+      setEditingNoteId(id);
+      setTempNote(currentNote || '');
+    }
+  };
+
+  const saveNote = (id: string) => {
+    onUpdateNote(id, tempNote);
+    setEditingNoteId(null);
   };
 
   return (
@@ -84,33 +119,98 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                   {t.emptyCart}
                 </div>
               ) : (
-                cartItems.map((item) => (
-                  <div key={item.id} className="flex justify-between items-center">
-                    <div className="flex-1 pr-2">
-                      <div className="text-sm font-medium text-slate-800 line-clamp-1">
-                        {item.dish_name}
+                <>
+                  {cartItems.map((item) => {
+                    const currentNote = cartNotes[item.id] || '';
+                    const isEditing = editingNoteId === item.id;
+
+                    return (
+                      <div key={item.id} className="flex flex-col gap-2 border-b border-slate-50 pb-2 last:border-0">
+                        <div className="flex justify-between items-start">
+                          <div className="flex-1 pr-2">
+                            <div className="flex items-center gap-2">
+                               <div className="text-sm font-medium text-slate-800 line-clamp-1">
+                                  {item.dish_name}
+                               </div>
+                               <button 
+                                  onClick={() => startEditingNote(item.id, currentNote)}
+                                  className={`text-xs flex items-center gap-1 ${currentNote ? 'text-amber-600' : 'text-slate-300 hover:text-slate-500'}`}
+                               >
+                                  <MessageSquareText size={14} />
+                               </button>
+                            </div>
+                            {/* Note Display if present */}
+                            {!isEditing && currentNote && (
+                               <div className="text-[10px] text-amber-600 mt-1 italic flex items-start gap-1">
+                                 <span className="font-bold shrink-0">{t.note}:</span> {currentNote}
+                               </div>
+                            )}
+                          </div>
+                          <div className="flex flex-col items-end gap-1">
+                            <div className="flex items-center gap-3 bg-slate-50 rounded px-2 py-1">
+                              <button
+                                onClick={() => onUpdateQuantity(item.id, -1)}
+                                className="text-slate-400 hover:text-slate-700"
+                              >
+                                -
+                              </button>
+                              <span className="text-sm w-4 text-center font-medium">
+                                {item.quantity}
+                              </span>
+                              <button
+                                onClick={() => onUpdateQuantity(item.id, 1)}
+                                className="text-slate-400 hover:text-slate-700"
+                              >
+                                +
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Note Input Area */}
+                        <AnimatePresence>
+                          {isEditing && (
+                            <motion.div 
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="flex items-center gap-2 overflow-hidden"
+                            >
+                              <input
+                                type="text"
+                                value={tempNote}
+                                onChange={(e) => setTempNote(e.target.value)}
+                                placeholder={t.notePlaceholder}
+                                autoFocus
+                                className="flex-1 text-xs border border-slate-200 rounded px-2 py-1 focus:outline-none focus:border-slate-400 bg-slate-50"
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') saveNote(item.id);
+                                }}
+                              />
+                              <button 
+                                onClick={() => saveNote(item.id)}
+                                className="p-1 bg-slate-800 text-white rounded hover:bg-slate-700"
+                              >
+                                <Check size={12} />
+                              </button>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
-                      <div className="text-xs text-slate-500">{item.cuisine}</div>
-                    </div>
-                    <div className="flex items-center gap-3 bg-slate-50 rounded px-2 py-1">
-                      <button
-                        onClick={() => onUpdateQuantity(item.id, -1)}
-                        className="text-slate-400 hover:text-slate-700"
-                      >
-                        -
-                      </button>
-                      <span className="text-sm w-4 text-center font-medium">
-                        {item.quantity}
-                      </span>
-                      <button
-                        onClick={() => onUpdateQuantity(item.id, 1)}
-                        className="text-slate-400 hover:text-slate-700"
-                      >
-                        +
-                      </button>
-                    </div>
+                    );
+                  })}
+                  
+                  {/* Cuisine Stats (Moved here inside scrollable area) */}
+                  <div className="pt-4 mt-2 border-t border-slate-100 border-dashed">
+                      <div className="flex flex-wrap gap-x-3 gap-y-1 justify-center text-[10px] text-slate-400">
+                          {Object.entries(cuisineStats).map(([cuisine, count]) => (
+                              <span key={cuisine} className="bg-slate-100 px-1.5 py-0.5 rounded">
+                                  {cuisine} x{count}
+                              </span>
+                          ))}
+                      </div>
                   </div>
-                ))
+                </>
               )}
             </div>
             

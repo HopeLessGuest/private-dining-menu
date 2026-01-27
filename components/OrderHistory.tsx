@@ -7,16 +7,19 @@ import { clsx } from 'clsx';
 
 interface OrderHistoryProps {
   orders: Order[];
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
   onDeleteOrder: (orderId: string) => void;
   language: Language;
 }
 
 export const OrderHistory: React.FC<OrderHistoryProps> = ({
   orders,
+  isOpen,
+  setIsOpen,
   onDeleteOrder,
   language,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [expandedOrderId, setExpandedOrderId] = useState<string | null>(null);
   const t = TRANSLATIONS[language];
 
@@ -117,9 +120,16 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({
                             >
                               <div className="p-4 pt-2 space-y-2">
                                 {order.items.map((item, idx) => (
-                                  <div key={`${order.id}-${item.id}-${idx}`} className="flex justify-between text-sm">
-                                    <span className="text-slate-600 line-clamp-1 flex-1 pr-4">{item.dish_name}</span>
-                                    <span className="font-mono text-slate-400">x{item.quantity}</span>
+                                  <div key={`${order.id}-${item.id}-${idx}`} className="flex flex-col text-sm border-b border-slate-100 last:border-0 pb-2 last:pb-0">
+                                    <div className="flex justify-between">
+                                      <span className="text-slate-600 line-clamp-1 flex-1 pr-4">{item.dish_name}</span>
+                                      <span className="font-mono text-slate-400">x{item.quantity}</span>
+                                    </div>
+                                    {item.note && (
+                                        <div className="text-[10px] text-amber-600 italic mt-0.5">
+                                            {t.note}: {item.note}
+                                        </div>
+                                    )}
                                   </div>
                                 ))}
                               </div>

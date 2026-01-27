@@ -52,7 +52,15 @@ export const TRANSLATIONS = {
     updateBadge: "Upd",
     close: "Close",
     errorInvalidJson: "Invalid file format: Expected a JSON array of dishes.",
-    errorParsing: "Error parsing JSON file. Please check the file for syntax errors."
+    errorParsing: "Error parsing JSON file. Please check the file for syntax errors.",
+    customDishTitle: "Exclusive Custom Dish",
+    customDishNamePlaceholder: "Name of your custom dish request...",
+    customDishDescPlaceholder: "Specific requirements (e.g., ingredients, flavor)...",
+    addToCart: "Add to Cart",
+    addNote: "Add Note",
+    saveNote: "Save",
+    notePlaceholder: "Special requests...",
+    note: "Note"
   },
   zh: {
     restaurantName: "Lumière",
@@ -103,7 +111,15 @@ export const TRANSLATIONS = {
     updateBadge: "更",
     close: "关闭",
     errorInvalidJson: "文件格式无效：需要菜品 JSON 数组。",
-    errorParsing: "解析 JSON 文件出错。请检查文件语法。"
+    errorParsing: "解析 JSON 文件出错。请检查文件语法。",
+    customDishTitle: "专享定制菜",
+    customDishNamePlaceholder: "输入您想定制的菜品名称...",
+    customDishDescPlaceholder: "具体要求（如：食材、口味偏好等）...",
+    addToCart: "加入购物车",
+    addNote: "添加备注",
+    saveNote: "保存",
+    notePlaceholder: "特殊要求...",
+    note: "备注"
   }
 };
 
