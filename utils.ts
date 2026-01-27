@@ -10,6 +10,26 @@ export const getUniqueCuisines = (dishes: Dish[]): string[] => {
   return Array.from(cuisines);
 };
 
+export const sortDishesByCuisine = (dishes: Dish[]): Dish[] => {
+  const cuisineOrder: string[] = [];
+  const dishesByCuisine: Record<string, Dish[]> = {};
+
+  dishes.forEach((dish) => {
+    if (!dishesByCuisine[dish.cuisine]) {
+      dishesByCuisine[dish.cuisine] = [];
+      cuisineOrder.push(dish.cuisine);
+    }
+    dishesByCuisine[dish.cuisine].push(dish);
+  });
+
+  const sortedDishes: Dish[] = [];
+  cuisineOrder.forEach((cuisine) => {
+    sortedDishes.push(...dishesByCuisine[cuisine]);
+  });
+  
+  return sortedDishes;
+};
+
 export const groupDishesIntoPages = (dishes: Dish[], itemsPerPage: number): Dish[][] => {
   const enabledDishes = dishes.filter((d) => d.enabled);
   const pages: Dish[][] = [];

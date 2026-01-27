@@ -54,7 +54,7 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
     });
     return stats;
   }, [cartItems]);
-
+  
   const handleSend = () => {
     onPlaceOrder();
     setIsOpen(false);

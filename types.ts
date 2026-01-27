@@ -8,10 +8,13 @@ export interface Dish {
   sweetness: number;
   enabled: boolean;
   featured: boolean;
+  isCustom?: boolean;
+  isCustomBuilder?: boolean;
 }
 
 export interface CartItem extends Dish {
   quantity: number;
+  note?: string;
 }
 
 export interface Order {
@@ -22,5 +25,6 @@ export interface Order {
 }
 
 export type CartState = Record<string, number>; // dishId -> quantity
+export type NoteState = Record<string, string>; // dishId -> note
 
 export type Language = 'en' | 'zh';

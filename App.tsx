@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Dish, CartState, Language, Order, NoteState, CartItem } from './types';
 import { DISHES_PER_PAGE, TRANSLATIONS } from './constants';
-import { groupDishesIntoPages, getUniqueCuisines, generateId } from './utils';
+import { groupDishesIntoPages, getUniqueCuisines, generateId, sortDishesByCuisine } from './utils';
 import { MenuPage } from './components/MenuPage';
 import { ManagementPanel } from './components/ManagementPanel';
 import { FloatingCart } from './components/FloatingCart';
 import { OrderHistory } from './components/OrderHistory';
 import { CuisineDirectory } from './components/CuisineDirectory';
+import { subscribeToOrders, addOrderToCloud, removeOrderFromCloud } from './services/firebase';
 
 const App: React.FC = () => {
   const [dishes, setDishes] = useState<Dish[]>([]);
@@ -42,9 +43,22 @@ const App: React.FC = () => {
     fetchMenu();
   }, []);
 
+  // Subscribe to Firebase Order History
+  useEffect(() => {
+    // This listener triggers whenever the database changes (add/delete by any user)
+    const unsubscribe = subscribeToOrders((orders) => {
+      setOrderHistory(orders);
+    });
+
+    // Cleanup listener on unmount
+    return () => unsubscribe();
+  }, []);
+
   // Filter out custom dishes (orders) but append the "Builder" placeholder to the end of the menu
   const menuDishes = useMemo(() => {
     const standardDishes = dishes.filter(d => !d.isCustom);
+    // Sort dishes so they are grouped by cuisine (preserving the order of first appearance of each cuisine)
+    const sortedDishes = sortDishesByCuisine(standardDishes);
     
     const customBuilderDish: Dish = {
       id: 'custom-builder-placeholder',
@@ -59,7 +73,7 @@ const App: React.FC = () => {
       isCustomBuilder: true
     };
 
-    return [...standardDishes, customBuilderDish];
+    return [...sortedDishes, customBuilderDish];
   }, [dishes, t.customDishTitle]);
 
   const pages = useMemo(() => groupDishesIntoPages(menuDishes, DISHES_PER_PAGE), [menuDishes]);
@@ -136,20 +150,34 @@ const App: React.FC = () => {
 
     if (items.length === 0) return;
 
-    const newOrder: Order = {
-      id: generateId(),
+    // Construct the order object
+    // Note: We don't generate an ID here anymore (except a temp one), 
+    // because Firebase will assign the real unique ID upon pushing.
+    const newOrderData = {
       timestamp: Date.now(),
       items: items,
       totalQuantity: items.reduce((acc, item) => acc + item.quantity, 0),
     };
 
-    setOrderHistory((prev) => [newOrder, ...prev]);
+    // FIX: Firebase Realtime Database throws an error if any property is `undefined`.
+    // We use JSON.parse(JSON.stringify(...)) to strip out all undefined keys 
+    // (like `note` when undefined, or `isCustomBuilder` which is optional).
+    const sanitizedOrder = JSON.parse(JSON.stringify(newOrderData));
+
+    // Send to Cloud
+    addOrderToCloud(sanitizedOrder);
+
+    // Clear local cart immediately
     setCart({});
     setCartNotes({});
+    
+    // We do NOT manually setOrderHistory here. 
+    // The useEffect subscription will detect the new data from Firebase and update the UI automatically.
   };
 
   const handleDeleteOrder = (orderId: string) => {
-    setOrderHistory((prev) => prev.filter(o => o.id !== orderId));
+    // Remove from Cloud
+    removeOrderFromCloud(orderId);
   };
 
   if (isLoading) {
