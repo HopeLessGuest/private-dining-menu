@@ -34,7 +34,7 @@
   },
   {
     "id": "4",
-    "cuisine": "西餐前菜",
+    "cuisine": "中餐主食",
     "dish_name": "土豆培根鸡蛋沙拉",
     "description": "绵软土豆搭配香煎培根与鸡蛋，口感丰富而平衡。",
     "video_url": null,
@@ -124,12 +124,12 @@
     "id": "12",
     "cuisine": "西餐主食",
     "dish_name": "黄油鸡",
-    "description": "鸡肉炖煮于黄油香料酱汁中，风味柔和而浓郁。",
+    "description": "鸡肉炖煮于黄油与香料酱汁中，口感柔和，风味浓郁。",
     "video_url": null,
     "spiciness": 0,
     "sweetness": 0,
     "enabled": true,
-    "featured": true
+    "featured": false
   },
   {
     "id": "13",
@@ -229,5 +229,93 @@
     "sweetness": 0,
     "enabled": true,
     "featured": false
+  },
+  {
+    "id": "1",
+    "sweetness": 0,
+    "spiciness": 1,
+    "video_url": null,
+    "description": "薄切猪肉配蒜泥与红油调味，蒜香浓郁，口感清爽不腻。",
+    "cuisine": "川菜",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "蒜泥白肉"
+  },
+  {
+    "id": "2",
+    "sweetness": 0,
+    "spiciness": 0,
+    "video_url": null,
+    "description": "鲜虾泥填入青椒中煎制，虾肉弹嫩，清香微甜。",
+    "cuisine": "粤菜",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "青椒酿虾"
+  },
+  {
+    "id": "4",
+    "sweetness": 0,
+    "spiciness": 1,
+    "video_url": null,
+    "description": "手工宽面浇以热油与辣椒蒜香，面条筋道，香气十足。",
+    "cuisine": "中餐主食",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "油泼面 / 扯面 / 宽面 / 粉"
+  },
+  {
+    "id": "5",
+    "sweetness": 0,
+    "spiciness": 0,
+    "video_url": null,
+    "description": "细腻顺滑的土豆泥，搭配咸香肉汁，口感柔软。",
+    "cuisine": "西餐前菜",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "KFC土豆泥"
+  },
+  {
+    "id": "6",
+    "sweetness": 0,
+    "spiciness": 0,
+    "video_url": null,
+    "description": "炸鸡搭配金黄薯条，外酥里嫩，经典休闲组合。",
+    "cuisine": "西餐前菜",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "鸡肉薯条"
+  },
+  {
+    "id": "7",
+    "sweetness": 0,
+    "spiciness": 0,
+    "video_url": null,
+    "description": "猪肘与酸菜慢炖，肉质软烂，酸香浓厚。",
+    "cuisine": "东北菜",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "酸菜炖猪肘"
+  },
+  {
+    "id": "8",
+    "sweetness": 0,
+    "spiciness": 0,
+    "video_url": null,
+    "description": "河粉大火快炒，牛肉嫩滑，锅气十足。",
+    "cuisine": "粤菜",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "干炒牛河"
+  },
+  {
+    "id": "9",
+    "sweetness": 0,
+    "spiciness": 0,
+    "video_url": null,
+    "description": "细面拌以葱油酱汁，香气纯粹，口味朴实。",
+    "cuisine": "江浙菜",
+    "enabled": true,
+    "featured": false,
+    "dish_name": "葱油面"
   }
 ]
