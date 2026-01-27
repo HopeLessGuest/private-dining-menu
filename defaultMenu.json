@@ -1,0 +1,233 @@
+[
+  {
+    "id": "1",
+    "cuisine": "中餐前菜",
+    "dish_name": "乾隆白菜",
+    "description": "清脆爽口的白菜拌以芝麻与蒜香酱汁，口感清新，回味醇厚。",
+    "video_url": "https://www.bilibili.com/video/BV198whe6EEQ",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": true
+  },
+  {
+    "id": "2",
+    "cuisine": "中餐前菜",
+    "dish_name": "香煎芦笋",
+    "description": "芦笋轻煎至表面微焦，保留自然清甜与脆嫩口感。",
+    "video_url": "https://www.bilibili.com/video/BV17V411n7ZX",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "3",
+    "cuisine": "中餐前菜",
+    "dish_name": "溏心酱鸡蛋",
+    "description": "半熟鸡蛋浸入酱汁腌制，蛋黄绵密，风味浓郁。",
+    "video_url": "https://www.bilibili.com/video/BV1JY9JYhEag",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "4",
+    "cuisine": "西餐前菜",
+    "dish_name": "土豆培根鸡蛋沙拉",
+    "description": "绵软土豆搭配香煎培根与鸡蛋，口感丰富而平衡。",
+    "video_url": null,
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": true
+  },
+  {
+    "id": "5",
+    "cuisine": "西餐前菜",
+    "dish_name": "番茄鸡肉蔬菜土豆塔",
+    "description": "番茄、鸡肉与多种蔬菜分层烘烤，层次分明，风味饱满。",
+    "video_url": "https://www.bilibili.com/video/BV1oH4y1K7ba",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "6",
+    "cuisine": "中餐主食",
+    "dish_name": "扬州炒饭",
+    "description": "米粒分明，蛋香浓郁，配料丰富而不杂乱。",
+    "video_url": "https://www.bilibili.com/video/BV1oy4y1r7MR",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "7",
+    "cuisine": "中餐主食",
+    "dish_name": "肉夹馍",
+    "description": "慢炖猪肉切碎夹入热馍，肉香浓郁，口感扎实。",
+    "video_url": "https://www.bilibili.com/video/BV15q4y1Q7N6",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "8",
+    "cuisine": "中餐主食",
+    "dish_name": "皮蛋瘦肉粥",
+    "description": "米粥细腻顺滑，皮蛋与瘦肉交融，温润养胃。",
+    "video_url": "https://www.bilibili.com/video/BV1K4411s71U",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "9",
+    "cuisine": "西餐主食",
+    "dish_name": "番茄意面",
+    "description": "意面裹以番茄酱汁，酸甜平衡，清爽不腻。",
+    "video_url": null,
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": true
+  },
+  {
+    "id": "10",
+    "cuisine": "西餐主食",
+    "dish_name": "奶油芝士意面",
+    "description": "浓郁奶油与芝士包裹意面，口感顺滑而醇厚。",
+    "video_url": null,
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "11",
+    "cuisine": "西餐主食",
+    "dish_name": "酥皮奶油蘑菇浓汤",
+    "description": "香浓蘑菇汤配以酥皮封顶，层次丰富，温暖饱满。",
+    "video_url": "https://www.bilibili.com/video/BV1Bb4y1r73j",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": true
+  },
+  {
+    "id": "12",
+    "cuisine": "西餐主食",
+    "dish_name": "黄油鸡",
+    "description": "鸡肉炖煮于黄油香料酱汁中，风味柔和而浓郁。",
+    "video_url": null,
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": true
+  },
+  {
+    "id": "13",
+    "cuisine": "西餐主食",
+    "dish_name": "牛排",
+    "description": "高温煎制，锁住肉汁，呈现纯粹牛肉风味。",
+    "video_url": null,
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "14",
+    "cuisine": "西餐主食",
+    "dish_name": "慢烤猪肋排",
+    "description": "低温慢烤至软烂入味，肉质丰厚，香气浓郁。",
+    "video_url": "https://www.bilibili.com/video/BV1oq4y1N7yu",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "15",
+    "cuisine": "西餐主食",
+    "dish_name": "北非蛋",
+    "description": "鸡蛋浸入番茄与香料酱汁中，风味浓烈而温暖。",
+    "video_url": "https://www.bilibili.com/video/BV17T421C7nQ",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "16",
+    "cuisine": "蔬菜",
+    "dish_name": "蚝油生菜",
+    "description": "生菜焯熟后淋以蚝油，清爽鲜香。",
+    "video_url": "https://www.bilibili.com/video/BV1bS4y1r7jR",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "17",
+    "cuisine": "中餐主食",
+    "dish_name": "酱汁扒鸡",
+    "description": "鸡肉煎制后裹以浓郁酱汁，肉质鲜嫩入味。",
+    "video_url": "https://www.bilibili.com/video/BV1xZSiYCE5P",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "18",
+    "cuisine": "中餐主食",
+    "dish_name": "红焖羊排",
+    "description": "羊排慢焖至酥软，酱香浓厚，回味悠长。",
+    "video_url": "https://www.bilibili.com/video/BV17g4y1r7mu",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "19",
+    "cuisine": "中餐主食",
+    "dish_name": "可乐鸡翅",
+    "description": "鸡翅以可乐焖制，色泽红亮，口味甘香。",
+    "video_url": "https://www.bilibili.com/video/BV1Pw4m1k7pU",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": true
+  },
+  {
+    "id": "20",
+    "cuisine": "中餐主食",
+    "dish_name": "东坡肉",
+    "description": "五花肉慢炖至入口即化，酱香浓郁。",
+    "video_url": "https://www.bilibili.com/video/BV1ga4y1f7Zs",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  },
+  {
+    "id": "21",
+    "cuisine": "中餐主食",
+    "dish_name": "肉末烧茄子",
+    "description": "茄子软糯入味，搭配肉末，家常而温暖。",
+    "video_url": "https://www.bilibili.com/video/BV1n4411p7ja",
+    "spiciness": 0,
+    "sweetness": 0,
+    "enabled": true,
+    "featured": false
+  }
+]
