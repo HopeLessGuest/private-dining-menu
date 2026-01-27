@@ -21,7 +21,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetch('./defaultMenu.json');
+        const response = await fetch('/defaultMenu.json');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
