@@ -7,7 +7,7 @@ import { ManagementPanel } from './components/ManagementPanel';
 import { FloatingCart } from './components/FloatingCart';
 import { OrderHistory } from './components/OrderHistory';
 import { CuisineDirectory } from './components/CuisineDirectory';
-import { subscribeToOrders, addOrderToCloud, removeOrderFromCloud } from './services/firebase';
+import { subscribeToOrders, addOrderToCloud, removeOrderFromCloud, updateOrderInCloud } from './services/firebase';
 
 const App: React.FC = () => {
   const [dishes, setDishes] = useState<Dish[]>([]);
@@ -157,6 +157,7 @@ const App: React.FC = () => {
       timestamp: Date.now(),
       items: items,
       totalQuantity: items.reduce((acc, item) => acc + item.quantity, 0),
+      status: 'Submitted' // Default status
     };
 
     // FIX: Firebase Realtime Database throws an error if any property is `undefined`.
@@ -178,6 +179,10 @@ const App: React.FC = () => {
   const handleDeleteOrder = (orderId: string) => {
     // Remove from Cloud
     removeOrderFromCloud(orderId);
+  };
+  
+  const handleUpdateOrderStatus = (orderId: string, status: 'Submitted' | 'Completed') => {
+      updateOrderInCloud(orderId, { status });
   };
 
   if (isLoading) {
@@ -201,7 +206,8 @@ const App: React.FC = () => {
         orders={orderHistory} 
         isOpen={isHistoryOpen}
         setIsOpen={toggleHistory}
-        onDeleteOrder={handleDeleteOrder} 
+        onDeleteOrder={handleDeleteOrder}
+        onUpdateStatus={handleUpdateOrderStatus}
         language={language}
       />
       

@@ -3,7 +3,7 @@ import * as firebaseDatabase from "firebase/database";
 import { Order } from "../types";
 
 // Workaround for TypeScript errors where named exports from firebase/database are not detected
-const { getDatabase, ref, onValue, push, remove } = firebaseDatabase as any;
+const { getDatabase, ref, onValue, push, remove, update } = firebaseDatabase as any;
 
 // ⚠️ IMPORTANT: Replace this with your own Firebase project configuration
 // You can get this from the Firebase Console -> Project Settings -> General
@@ -50,9 +50,11 @@ export const subscribeToOrders = (callback: (orders: Order[]) => void) => {
       // We use the Firebase Key as the Order ID ensuring consistency across devices
       Object.entries(data).forEach(([key, value]) => {
         if (value && typeof value === 'object') {
+            const orderObj = value as any;
             loadedOrders.push({
-                ...(value as any),
-                id: key // Overwrite the local random ID with the global Firebase Key
+                ...orderObj,
+                id: key, // Overwrite the local random ID with the global Firebase Key
+                status: orderObj.status || 'Submitted' // Default to Submitted if missing
             });
         }
       });
@@ -84,6 +86,19 @@ export const addOrderToCloud = async (order: Omit<Order, 'id'>) => {
   } catch (err) {
     console.error("Failed to push order:", err);
     alert("Order failed to send. Please check your network connection.");
+  }
+};
+
+/**
+ * Updates an specific fields of an order in Firebase.
+ */
+export const updateOrderInCloud = async (orderId: string, updates: Partial<Order>) => {
+  if (!db) return;
+  const orderRef = ref(db, `orders/${orderId}`);
+  try {
+      await update(orderRef, updates);
+  } catch(err) {
+      console.error("Failed to update order:", err);
   }
 };
 

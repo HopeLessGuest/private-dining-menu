@@ -329,7 +329,7 @@ export const ManagementPanel: React.FC<ManagementPanelProps> = ({ dishes, setDis
         onClick={() => setIsOpen(!isOpen)}
         className={clsx(
             "fixed left-0 top-24 z-50 p-2 bg-slate-800 text-white rounded-r-lg shadow-md transition-all duration-300",
-            isOpen ? "left-[400px]" : "left-0"
+            isOpen ? "left-[calc(100%-40px)] md:left-[400px]" : "left-0"
         )}
       >
         {isOpen ? <ChevronLeft size={20} /> : <Settings size={20} />}
@@ -338,7 +338,9 @@ export const ManagementPanel: React.FC<ManagementPanelProps> = ({ dishes, setDis
       {/* Panel */}
       <div
         className={clsx(
-          "fixed top-0 left-0 h-full w-[400px] bg-white shadow-2xl z-40 transform transition-transform duration-300 border-r border-slate-200 overflow-hidden flex flex-col",
+          "fixed top-0 left-0 h-full bg-white shadow-2xl z-40 transform transition-transform duration-300 border-r border-slate-200 overflow-hidden flex flex-col",
+          // Fix width for mobile: 100% on small screens, 400px on medium+
+          "w-full md:w-[400px]",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
