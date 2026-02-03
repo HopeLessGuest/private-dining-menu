@@ -3,6 +3,7 @@ import { ShoppingCart, X, Trash2, Send, MessageSquareText, Check } from 'lucide-
 import { Dish, CartState, Language, NoteState } from '../types';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TRANSLATIONS } from '../constants';
+import { getLocalizedText } from '../utils';
 
 interface FloatingCartProps {
   cart: CartState;
@@ -50,10 +51,11 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
   const cuisineStats = useMemo(() => {
     const stats: Record<string, number> = {};
     cartItems.forEach(item => {
-      stats[item.cuisine] = (stats[item.cuisine] || 0) + item.quantity;
+      const categoryKey = getLocalizedText(item.category, language);
+      stats[categoryKey] = (stats[categoryKey] || 0) + item.quantity;
     });
     return stats;
-  }, [cartItems]);
+  }, [cartItems, language]);
   
   const handleSend = () => {
     onPlaceOrder();
@@ -130,7 +132,7 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                           <div className="flex-1 pr-2">
                             <div className="flex items-center gap-2">
                                <div className="text-sm font-medium text-slate-800 line-clamp-1">
-                                  {item.dish_name}
+                                  {getLocalizedText(item.name, language)}
                                </div>
                                <button 
                                   onClick={() => startEditingNote(item.id, currentNote)}

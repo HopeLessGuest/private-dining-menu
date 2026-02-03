@@ -29,7 +29,7 @@
 *   **快速预览:** 可展开面板以回顾已选菜单列表。
 
 ### 🛠️ Menu Management (CMS) / 菜单管理系统
-*   **Drag & Drop:** Easily reorder dishes and cuisine sections using a robust drag-and-drop interface (`dnd-kit`).
+*   **Drag & Drop:** Easily reorder dishes and category sections using a robust drag-and-drop interface (`dnd-kit`).
 *   **Live Editing:** Add, edit, toggle visibility, or delete dishes instantly.
 *   **Data Persistence:** Import and Export menu data as JSON files for backup or sharing.
 *   **拖拽排序:** 使用强大的拖拽接口 (`dnd-kit`) 轻松调整菜品和分类顺序。
@@ -93,21 +93,21 @@
 ### Viewing the Menu / 浏览菜单
 *   Scroll through the pages to view dishes.
 *   Click the **Language Switcher** (Top Right) to change languages.
-*   Click the **Directory** (Left Sidebar) to quickly jump to a specific cuisine category.
+*   Click the **Directory** (Left Sidebar) to quickly jump to a specific category.
 *   滚动页面浏览菜品。
 *   点击右上角的 **语言切换器** 更改语言。
-*   点击左侧的 **目录** 快速跳转到特定菜系分类。
+*   点击左侧的 **目录** 快速跳转到特定分类。
 
 ### Managing the Menu / 管理菜单
 1.  Click the **Settings Icon** on the top left of the screen to open the **Management Panel**.
 2.  **Add Dish:** Click the "+ Add Dish" button.
 3.  **Edit:** Click on any dish in the list to expand editing details (Name, Description, Price, Video URL, Featured status).
-4.  **Reorder:** Drag dishes to reorder them within a category, or drag entire Cuisine Sections to reorder the flow of the menu.
+4.  **Reorder:** Drag dishes to reorder them within a category, or drag entire Category Sections to reorder the flow of the menu.
 5.  **Export/Import:** Use the download/upload icons to save your menu configuration.
 1.  点击屏幕左上角的 **设置图标** 打开 **管理面板**。
 2.  **添加菜品:** 点击 "+ 新菜品" 按钮。
 3.  **编辑:** 点击列表中的任意菜品展开编辑详情（名称、描述、价格、视频链接、推荐状态）。
-4.  **排序:** 拖拽菜品调整类目内顺序，或拖拽整个菜系板块调整菜单流程。
+4.  **排序:** 拖拽菜品调整类目内顺序，或拖拽整个分类板块调整菜单流程。
 5.  **导出/导入:** 使用下载/上传图标保存您的菜单配置。
 
 ---

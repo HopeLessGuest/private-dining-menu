@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Dish, CartState, Language, Order, NoteState, CartItem } from './types';
 import { DISHES_PER_PAGE, TRANSLATIONS } from './constants';
-import { groupDishesIntoPages, getUniqueCuisines, generateId, sortDishesByCuisine } from './utils';
+import { groupDishesIntoPages, getUniqueCategories, getUniqueTags, getUniqueTagObjects, getTagCounts, filterDishesByTag, generateId } from './utils';
 import { MenuPage } from './components/MenuPage';
 import { ManagementPanel } from './components/ManagementPanel';
 import { FloatingCart } from './components/FloatingCart';
 import { OrderHistory } from './components/OrderHistory';
-import { CuisineDirectory } from './components/CuisineDirectory';
+import { CategoryDirectory } from './components/CategoryDirectory';
 import { subscribeToOrders, addOrderToCloud, removeOrderFromCloud, updateOrderInCloud } from './services/firebase';
 
 const App: React.FC = () => {
@@ -16,6 +16,7 @@ const App: React.FC = () => {
   const [cartNotes, setCartNotes] = useState<NoteState>({});
   const [orderHistory, setOrderHistory] = useState<Order[]>([]);
   const [language, setLanguage] = useState<Language>('zh');
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   // UI States
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -54,17 +55,21 @@ const App: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
-  // Filter out custom dishes (orders) but append the "Builder" placeholder to the end of the menu
+  // 支持 tag 筛选
   const menuDishes = useMemo(() => {
     const standardDishes = dishes.filter(d => !d.isCustom);
-    // Sort dishes so they are grouped by cuisine (preserving the order of first appearance of each cuisine)
-    const sortedDishes = sortDishesByCuisine(standardDishes);
-    
+    let filtered = standardDishes;
+    if (selectedTag) {
+      filtered = filterDishesByTag(standardDishes, selectedTag, language);
+    }
+    // 按分类分组（可扩展排序）
+    // 这里直接返回 filtered
     const customBuilderDish: Dish = {
       id: 'custom-builder-placeholder',
-      cuisine: t.customDishTitle,
-      dish_name: '', // Placeholder, logic handled in DishItem
-      description: '',
+      category: { zh: t.customDishTitle, en: t.customDishTitle },
+      name: { zh: '', en: '' },
+      description: { zh: '', en: '' },
+      tags: [],
       video_url: null,
       spiciness: 0,
       sweetness: 0,
@@ -72,12 +77,13 @@ const App: React.FC = () => {
       featured: false,
       isCustomBuilder: true
     };
-
-    return [...sortedDishes, customBuilderDish];
-  }, [dishes, t.customDishTitle]);
+    return [...filtered, customBuilderDish];
+  }, [dishes, t.customDishTitle, selectedTag, language]);
 
   const pages = useMemo(() => groupDishesIntoPages(menuDishes, DISHES_PER_PAGE), [menuDishes]);
-  const uniqueCuisines = useMemo(() => getUniqueCuisines(menuDishes), [menuDishes]);
+  const uniqueCategories = useMemo(() => getUniqueCategories(dishes), [dishes]);
+  const uniqueTags = useMemo(() => getUniqueTagObjects(dishes), [dishes]);
+  const tagCounts = useMemo(() => getTagCounts(dishes), [dishes]);
 
   // Cart Logic
   const handleUpdateQuantity = (id: string, delta: number) => {
@@ -101,31 +107,32 @@ const App: React.FC = () => {
   };
 
   const handleAddCustomDish = (name: string, description: string) => {
-      const id = `custom-${generateId()}`;
-      const newDish: Dish = {
-          id: id,
-          cuisine: t.customDishTitle,
-          dish_name: name,
-          description: '', // Empty description so it doesn't show as static text
-          video_url: null,
-          spiciness: 0,
-          sweetness: 0,
-          enabled: false, // Hidden from main pages (except the builder itself)
-          featured: false,
-          isCustom: true
-      };
+    const id = `custom-${generateId()}`;
+    const newDish: Dish = {
+      id: id,
+      category: { zh: t.customDishTitle, en: t.customDishTitle },
+      name: { zh: name, en: name }, // Use bilingual structure
+      description: { zh: description, en: description }, // Use bilingual structure
+      tags: [],
+      video_url: null,
+      spiciness: 0,
+      sweetness: 0,
+      enabled: false, // Hidden from main pages (except the builder itself)
+      featured: false,
+      isCustom: true
+    };
 
-      setDishes(prev => [...prev, newDish]);
-      handleUpdateQuantity(newDish.id, 1);
-      
-      // Map the "Specific requirements" input directly to the cart note
-      if (description && description.trim() !== '') {
-          handleUpdateNote(id, description);
-      }
-      
-      // Open cart to show the addition
-      setIsCartOpen(true);
-      setIsHistoryOpen(false);
+    setDishes(prev => [...prev, newDish]);
+    handleUpdateQuantity(newDish.id, 1);
+
+    // Map the "Specific requirements" input directly to the cart note
+    if (description && description.trim() !== '') {
+        handleUpdateNote(id, description);
+    }
+
+    // Open cart to show the addition
+    setIsCartOpen(true);
+    setIsHistoryOpen(false);
   };
 
   // Coordinated Toggle Logic
@@ -199,7 +206,14 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-stone-100 font-sans pb-24">
       {/* Navigation & Utilities */}
-      <CuisineDirectory cuisines={uniqueCuisines} language={language} />
+      <CategoryDirectory 
+        categories={uniqueCategories} 
+        tags={uniqueTags} 
+        tagCounts={tagCounts}
+        selectedTag={selectedTag}
+        onTagSelect={setSelectedTag}
+        language={language} 
+      />
       <ManagementPanel dishes={dishes} setDishes={setDishes} language={language} />
       
       <OrderHistory 
@@ -245,6 +259,7 @@ const App: React.FC = () => {
                 onAddCustomDish={handleAddCustomDish}
                 language={language}
                 onLanguageChange={setLanguage}
+                selectedTag={selectedTag}
               />
             );
           })

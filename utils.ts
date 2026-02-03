@@ -1,33 +1,75 @@
 import { Dish } from './types';
 
-export const getUniqueCuisines = (dishes: Dish[]): string[] => {
-  const cuisines = new Set<string>();
+
+// Helper function to get localized text
+export function getLocalizedText(
+  field?: { zh?: string; en?: string },
+  lang: "zh" | "en" = "zh"
+): string {
+  if (!field) return "";
+  return field[lang] || field.zh || field.en || "";
+}
+
+// 获取所有唯一分类
+export const getUniqueCategories = (dishes: Dish[]): { zh: string; en: string }[] => {
+  const categoriesMap = new Map<string, { zh: string; en: string }>();
   dishes.forEach((dish) => {
     if (dish.enabled) {
-      cuisines.add(dish.cuisine);
+      const key = dish.category.en || dish.category.zh;
+      if (key && !categoriesMap.has(key)) {
+        categoriesMap.set(key, dish.category);
+      }
     }
   });
-  return Array.from(cuisines);
+  return Array.from(categoriesMap.values());
 };
 
-export const sortDishesByCuisine = (dishes: Dish[]): Dish[] => {
-  const cuisineOrder: string[] = [];
-  const dishesByCuisine: Record<string, Dish[]> = {};
-
+// 获取所有唯一 tag（按当前语言）
+export const getUniqueTags = (dishes: Dish[], lang: 'zh' | 'en'): string[] => {
+  const tags = new Set<string>();
   dishes.forEach((dish) => {
-    if (!dishesByCuisine[dish.cuisine]) {
-      dishesByCuisine[dish.cuisine] = [];
-      cuisineOrder.push(dish.cuisine);
+    if (dish.enabled && dish.tags) {
+      dish.tags.forEach(tag => tag[lang] && tags.add(tag[lang]!));
     }
-    dishesByCuisine[dish.cuisine].push(dish);
   });
+  return Array.from(tags);
+};
 
-  const sortedDishes: Dish[] = [];
-  cuisineOrder.forEach((cuisine) => {
-    sortedDishes.push(...dishesByCuisine[cuisine]);
+// 获取所有唯一 tag 对象（包含 zh 和 en）
+export const getUniqueTagObjects = (dishes: Dish[]): { zh: string; en: string }[] => {
+  const tagsMap = new Map<string, { zh: string; en: string }>();
+  dishes.forEach((dish) => {
+    if (dish.enabled && dish.tags) {
+      dish.tags.forEach(tag => {
+        const key = tag.en || tag.zh || '';
+        if (key && !tagsMap.has(key)) {
+          tagsMap.set(key, tag);
+        }
+      });
+    }
   });
-  
-  return sortedDishes;
+  return Array.from(tagsMap.values());
+};
+
+// 统计所有 tag 数量（使用英文版本作为 key）
+export const getTagCounts = (dishes: Dish[]): Record<string, number> => {
+  const counts: Record<string, number> = {};
+  dishes.forEach((dish) => {
+    if (dish.enabled && dish.tags) {
+      dish.tags.forEach(tag => {
+        if (tag.en) counts[tag.en] = (counts[tag.en] || 0) + 1;
+      });
+    }
+  });
+  return counts;
+};
+
+// 按 tag 筛选菜品
+export const filterDishesByTag = (dishes: Dish[], tag: string, _lang: 'zh' | 'en'): Dish[] => {
+  return dishes.filter(dish =>
+    dish.enabled &&
+    dish.tags.some(t => t.zh === tag || t.en === tag)
+  );
 };
 
 export const groupDishesIntoPages = (dishes: Dish[], itemsPerPage: number): Dish[][] => {

@@ -3,6 +3,7 @@ import { Dish, CartState, Language } from '../types';
 import { DishItem, HeaderType } from './DishItem';
 import { TRANSLATIONS } from '../constants';
 import { clsx } from 'clsx';
+import { getLocalizedText } from '../utils';
 
 interface MenuPageProps {
   dishes: Dish[];
@@ -13,6 +14,7 @@ interface MenuPageProps {
   pageNumber: number;
   language: Language;
   onLanguageChange: (lang: Language) => void;
+  selectedTag?: string | null;
 }
 
 export const MenuPage: React.FC<MenuPageProps> = ({
@@ -24,6 +26,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
   pageNumber,
   language,
   onLanguageChange,
+  selectedTag,
 }) => {
   const t = TRANSLATIONS[language];
 
@@ -46,7 +49,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
   ): HeaderType => {
     // 1. First Item of the Page (Top Left)
     if (colType === 'left' && index === 0) {
-      if (prevContextDish && prevContextDish.cuisine === dish.cuisine) {
+      if (prevContextDish && prevContextDish.category.en === dish.category.en) {
         return 'subtle-page';
       }
       return 'standard';
@@ -54,14 +57,14 @@ export const MenuPage: React.FC<MenuPageProps> = ({
 
     // 2. First Item of the Right Column (Top Right)
     if (colType === 'right' && index === 0) {
-      if (prevContextDish && prevContextDish.cuisine === dish.cuisine) {
+      if (prevContextDish && prevContextDish.category.en === dish.category.en) {
         return 'subtle-column';
       }
       return 'standard';
     }
 
     // 3. Inner Items
-    if (index > 0 && list[index - 1].cuisine !== dish.cuisine) {
+    if (index > 0 && list[index - 1].category.en !== dish.category.en) {
       return 'standard';
     }
 
@@ -101,7 +104,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
           <h1 className="serif text-4xl md:text-5xl text-slate-900 tracking-wider mb-2 uppercase flex items-center justify-center gap-4">
             <span>{t.restaurantName}</span>
             <span 
-              className="text-6xl md:text-7xl opacity-90" 
+              className="text-7xl md:text-8xl opacity-90" 
               style={{ fontFamily: '"Ma Shan Zheng", cursive' }}
             >
               {t.restaurantNameZh}
@@ -125,6 +128,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
                 onUpdateQuantity={onUpdateQuantity}
                 onAddCustomDish={onAddCustomDish}
                 language={language}
+                selectedTag={selectedTag}
               />
             ))}
           </div>
@@ -146,6 +150,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({
                 onUpdateQuantity={onUpdateQuantity}
                 onAddCustomDish={onAddCustomDish}
                 language={language}
+                selectedTag={selectedTag}
               />
             ))}
           </div>

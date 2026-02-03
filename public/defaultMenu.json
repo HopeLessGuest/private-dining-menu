@@ -1,321 +1,345 @@
 [
   {
     "id": "1",
-    "cuisine": "中餐前菜",
-    "dish_name": "乾隆白菜",
-    "description": "清脆爽口的白菜拌以芝麻与蒜香酱汁，口感清新，回味醇厚。",
-    "video_url": "https://www.bilibili.com/video/BV198whe6EEQ",
+    "category": { "zh": "前菜", "en": "Appetizers" },
+    "name": { "zh": "乾隆白菜", "en": "Qianlong Cabbage" },
+    "description": { "zh": "清脆爽口的白菜拌以芝麻与蒜香酱汁，口感清新，回味醇厚。", "en": "Crisp cabbage tossed with sesame and garlic sauce, refreshing and rich aftertaste." },
+    "tags": [
+      { "zh": "主厨推荐", "en": "Chef's Special" },
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "清淡", "en": "Light" },
+      { "zh": "下饭", "en": "Goes with Rice" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": true,
     "enabled": true,
-    "featured": true
+    "video_url": "https://www.bilibili.com/video/BV198whe6EEQ"
   },
   {
     "id": "2",
-    "cuisine": "中餐前菜",
-    "dish_name": "香煎芦笋",
-    "description": "芦笋轻煎至表面微焦，保留自然清甜与脆嫩口感。",
-    "video_url": "https://www.bilibili.com/video/BV17V411n7ZX",
+    "category": { "zh": "前菜", "en": "Appetizers" },
+    "name": { "zh": "香煎芦笋", "en": "Pan-seared Asparagus" },
+    "description": { "zh": "芦笋轻煎至表面微焦，保留自然清甜与脆嫩口感。", "en": "Asparagus lightly seared for a caramelized surface, retaining natural sweetness and crispness." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "蔬菜", "en": "Vegetable" },
+      { "zh": "清淡", "en": "Light" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV17V411n7ZX"
   },
   {
     "id": "3",
-    "cuisine": "中餐前菜",
-    "dish_name": "溏心酱鸡蛋",
-    "description": "半熟鸡蛋浸入酱汁腌制，蛋黄绵密，风味浓郁。",
-    "video_url": "https://www.bilibili.com/video/BV1JY9JYhEag",
+    "category": { "zh": "前菜", "en": "Appetizers" },
+    "name": { "zh": "溏心酱鸡蛋", "en": "Soy-marinated Soft-boiled Egg" },
+    "description": { "zh": "半熟鸡蛋浸入酱汁腌制，蛋黄绵密，风味浓郁。", "en": "Soft-boiled eggs marinated in soy sauce, creamy yolk and rich flavor." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "蛋类", "en": "Egg" },
+      { "zh": "咸鲜", "en": "Savory" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1JY9JYhEag"
   },
   {
     "id": "4",
-    "cuisine": "中餐主食",
-    "dish_name": "土豆培根鸡蛋沙拉",
-    "description": "绵软土豆搭配香煎培根与鸡蛋，口感丰富而平衡。",
-    "video_url": null,
+    "category": { "zh": "主食", "en": "Main Courses" },
+    "name": { "zh": "土豆培根鸡蛋沙拉", "en": "Potato Bacon Egg Salad" },
+    "description": { "zh": "绵软土豆搭配香煎培根与鸡蛋，口感丰富而平衡。", "en": "Soft potatoes with crispy bacon and egg, rich and balanced texture." },
+    "tags": [
+      { "zh": "主厨推荐", "en": "Chef's Special" },
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "北美", "en": "North America" },
+      { "zh": "主食", "en": "Staple" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": true,
     "enabled": true,
-    "featured": true
+    "video_url": null
   },
   {
     "id": "5",
-    "cuisine": "西餐前菜",
-    "dish_name": "番茄鸡肉蔬菜土豆塔",
-    "description": "番茄、鸡肉与多种蔬菜分层烘烤，层次分明，风味饱满。",
-    "video_url": "https://www.bilibili.com/video/BV1oH4y1K7ba",
+    "category": { "zh": "前菜", "en": "Appetizers" },
+    "name": { "zh": "番茄鸡肉蔬菜土豆塔", "en": "Tomato Chicken Vegetable Potato Gratin" },
+    "description": { "zh": "番茄、鸡肉与多种蔬菜分层烘烤，层次分明，风味饱满。", "en": "Tomato, chicken, and vegetables baked in layers, full-bodied flavor." },
+    "tags": [
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "北美", "en": "North America" },
+      { "zh": "蔬菜", "en": "Vegetable" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1oH4y1K7ba"
   },
   {
     "id": "6",
-    "cuisine": "中餐主食",
-    "dish_name": "扬州炒饭",
-    "description": "米粒分明，蛋香浓郁，配料丰富而不杂乱。",
-    "video_url": "https://www.bilibili.com/video/BV1oy4y1r7MR",
+    "category": { "zh": "主食", "en": "Main Courses" },
+    "name": { "zh": "扬州炒饭", "en": "Yangzhou Fried Rice" },
+    "description": { "zh": "米粒分明，蛋香浓郁，配料丰富而不杂乱。", "en": "Distinct rice grains, rich egg aroma, abundant but harmonious ingredients." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "主食", "en": "Staple" },
+      { "zh": "下饭", "en": "Goes with Rice" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1oy4y1r7MR"
   },
   {
     "id": "7",
-    "cuisine": "中餐主食",
-    "dish_name": "肉夹馍",
-    "description": "慢炖猪肉切碎夹入热馍，肉香浓郁，口感扎实。",
-    "video_url": "https://www.bilibili.com/video/BV15q4y1Q7N6",
+    "category": { "zh": "主食", "en": "Main Courses" },
+    "name": { "zh": "肉夹馍", "en": "Roujiamo (Chinese Burger)" },
+    "description": { "zh": "慢炖猪肉切碎夹入热馍，肉香浓郁，口感扎实。", "en": "Slow-braised pork chopped and stuffed in hot bun, rich and hearty." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "主食", "en": "Staple" },
+      { "zh": "下饭", "en": "Goes with Rice" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV15q4y1Q7N6"
   },
   {
     "id": "8",
-    "cuisine": "中餐主食",
-    "dish_name": "皮蛋瘦肉粥",
-    "description": "米粥细腻顺滑，皮蛋与瘦肉交融，温润养胃。",
-    "video_url": "https://www.bilibili.com/video/BV1K4411s71U",
+    "category": { "zh": "主食", "en": "Main Courses" },
+    "name": { "zh": "皮蛋瘦肉粥", "en": "Century Egg & Pork Congee" },
+    "description": { "zh": "米粥细腻顺滑，皮蛋与瘦肉交融，温润养胃。", "en": "Silky congee with century egg and pork, nourishing and gentle." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "主食", "en": "Staple" },
+      { "zh": "清淡", "en": "Light" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1K4411s71U"
   },
   {
     "id": "9",
-    "cuisine": "西餐主食",
-    "dish_name": "番茄意面",
-    "description": "意面裹以番茄酱汁，酸甜平衡，清爽不腻。",
-    "video_url": null,
+    "category": { "zh": "主食", "en": "Main Courses" },
+    "name": { "zh": "番茄意面", "en": "Tomato Pasta" },
+    "description": { "zh": "意面裹以番茄酱汁，酸甜平衡，清爽不腻。", "en": "Pasta with tomato sauce, balanced sweet and sour, refreshing." },
+    "tags": [
+      { "zh": "主厨推荐", "en": "Chef's Special" },
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "意大利", "en": "Italy" },
+      { "zh": "主食", "en": "Staple" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": true,
     "enabled": true,
-    "featured": true
+    "video_url": null
   },
   {
     "id": "10",
-    "cuisine": "西餐主食",
-    "dish_name": "奶油芝士意面",
-    "description": "浓郁奶油与芝士包裹意面，口感顺滑而醇厚。",
-    "video_url": null,
+    "category": { "zh": "主食", "en": "Main Courses" },
+    "name": { "zh": "奶油芝士意面", "en": "Cream Cheese Pasta" },
+    "description": { "zh": "浓郁奶油与芝士包裹意面，口感顺滑而醇厚。", "en": "Rich cream and cheese coat the pasta, smooth and mellow." },
+    "tags": [
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "意大利", "en": "Italy" },
+      { "zh": "主食", "en": "Staple" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": null
   },
   {
     "id": "11",
-    "cuisine": "西餐主食",
-    "dish_name": "酥皮奶油蘑菇浓汤",
-    "description": "香浓蘑菇汤配以酥皮封顶，层次丰富，温暖饱满。",
-    "video_url": "https://www.bilibili.com/video/BV1Bb4y1r73j",
+    "category": { "zh": "汤", "en": "Soups" },
+    "name": { "zh": "酥皮奶油蘑菇浓汤", "en": "Creamy Mushroom Soup with Puff Pastry" },
+    "description": { "zh": "香浓蘑菇汤配以酥皮封顶，层次丰富，温暖饱满。", "en": "Rich mushroom soup topped with puff pastry, layered and warming." },
+    "tags": [
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "北欧", "en": "Nordic" },
+      { "zh": "汤", "en": "Soup" },
+      { "zh": "主厨推荐", "en": "Chef's Special" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": true,
     "enabled": true,
-    "featured": true
+    "video_url": "https://www.bilibili.com/video/BV1Bb4y1r73j"
   },
   {
     "id": "12",
-    "cuisine": "西餐主食",
-    "dish_name": "黄油鸡",
-    "description": "鸡肉炖煮于黄油与香料酱汁中，口感柔和，风味浓郁。",
-    "video_url": null,
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "黄油鸡", "en": "Butter Chicken" },
+    "description": { "zh": "鸡肉炖煮于黄油与香料酱汁中，口感柔和，风味浓郁。", "en": "Chicken stewed in butter and spices, tender and flavorful." },
+    "tags": [
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "南亚", "en": "South Asian" },
+      { "zh": "主菜", "en": "Entree" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": null
   },
   {
     "id": "13",
-    "cuisine": "西餐主食",
-    "dish_name": "牛排",
-    "description": "高温煎制，锁住肉汁，呈现纯粹牛肉风味。",
-    "video_url": null,
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "牛排", "en": "Steak" },
+    "description": { "zh": "高温煎制，锁住肉汁，呈现纯粹牛肉风味。", "en": "Seared at high heat to lock in juices, pure beef flavor." },
+    "tags": [
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "北美", "en": "North America" },
+      { "zh": "主菜", "en": "Entree" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": null
   },
   {
     "id": "14",
-    "cuisine": "西餐主食",
-    "dish_name": "慢烤猪肋排",
-    "description": "低温慢烤至软烂入味，肉质丰厚，香气浓郁。",
-    "video_url": "https://www.bilibili.com/video/BV1oq4y1N7yu",
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "慢烤猪肋排", "en": "Slow-roasted Pork Ribs" },
+    "description": { "zh": "低温慢烤至软烂入味，肉质丰厚，香气浓郁。", "en": "Slow-roasted at low temperature, tender and flavorful pork ribs." },
+    "tags": [
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "北美", "en": "North America" },
+      { "zh": "主菜", "en": "Entree" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1oq4y1N7yu"
   },
   {
     "id": "15",
-    "cuisine": "西餐主食",
-    "dish_name": "北非蛋",
-    "description": "鸡蛋浸入番茄与香料酱汁中，风味浓烈而温暖。",
-    "video_url": "https://www.bilibili.com/video/BV17T421C7nQ",
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "北非蛋", "en": "Shakshuka" },
+    "description": { "zh": "鸡蛋浸入番茄与香料酱汁中，风味浓烈而温暖。", "en": "Eggs poached in tomato and spice sauce, intense and warming." },
+    "tags": [
+      { "zh": "西餐", "en": "Western" },
+      { "zh": "北非", "en": "North African" },
+      { "zh": "蛋类", "en": "Egg" },
+      { "zh": "主菜", "en": "Entree" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV17T421C7nQ"
   },
   {
     "id": "16",
-    "cuisine": "蔬菜",
-    "dish_name": "蚝油生菜",
-    "description": "生菜焯熟后淋以蚝油，清爽鲜香。",
-    "video_url": "https://www.bilibili.com/video/BV1bS4y1r7jR",
+    "category": { "zh": "配菜", "en": "Sides" },
+    "name": { "zh": "蚝油生菜", "en": "Oyster Sauce Lettuce" },
+    "description": { "zh": "生菜焯熟后淋以蚝油，清爽鲜香。", "en": "Blanched lettuce drizzled with oyster sauce, fresh and savory." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "蔬菜", "en": "Vegetable" },
+      { "zh": "清淡", "en": "Light" },
+      { "zh": "配菜", "en": "Side" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1bS4y1r7jR"
   },
   {
     "id": "17",
-    "cuisine": "中餐主食",
-    "dish_name": "酱汁扒鸡",
-    "description": "鸡肉煎制后裹以浓郁酱汁，肉质鲜嫩入味。",
-    "video_url": "https://www.bilibili.com/video/BV1xZSiYCE5P",
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "酱汁扒鸡", "en": "Sauced Pan Chicken" },
+    "description": { "zh": "鸡肉煎制后裹以浓郁酱汁，肉质鲜嫩入味。", "en": "Pan-fried chicken coated in rich sauce, tender and flavorful." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "主菜", "en": "Entree" },
+      { "zh": "酱香", "en": "Savory" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1xZSiYCE5P"
   },
   {
     "id": "18",
-    "cuisine": "中餐主食",
-    "dish_name": "红焖羊排",
-    "description": "羊排慢焖至酥软，酱香浓厚，回味悠长。",
-    "video_url": "https://www.bilibili.com/video/BV17g4y1r7mu",
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "红焖羊排", "en": "Braised Lamb Chops" },
+    "description": { "zh": "羊排慢焖至酥软，酱香浓厚，回味悠长。", "en": "Lamb chops braised until tender, rich in sauce and aftertaste." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "主菜", "en": "Entree" },
+      { "zh": "酱香", "en": "Savory" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV17g4y1r7mu"
   },
   {
     "id": "19",
-    "cuisine": "中餐主食",
-    "dish_name": "可乐鸡翅",
-    "description": "鸡翅以可乐焖制，色泽红亮，口味甘香。",
-    "video_url": "https://www.bilibili.com/video/BV1Pw4m1k7pU",
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "可乐鸡翅", "en": "Cola Chicken Wings" },
+    "description": { "zh": "鸡翅以可乐焖制，色泽红亮，口味甘香。", "en": "Chicken wings braised in cola, bright color and sweet-savory taste." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "主菜", "en": "Entree" },
+      { "zh": "甜味", "en": "Sweet" },
+      { "zh": "主厨推荐", "en": "Chef's Special" }
+    ],
     "spiciness": 0,
-    "sweetness": 0,
+    "sweetness": 2,
+    "featured": true,
     "enabled": true,
-    "featured": true
+    "video_url": "https://www.bilibili.com/video/BV1Pw4m1k7pU"
   },
   {
     "id": "20",
-    "cuisine": "中餐主食",
-    "dish_name": "东坡肉",
-    "description": "五花肉慢炖至入口即化，酱香浓郁。",
-    "video_url": "https://www.bilibili.com/video/BV1ga4y1f7Zs",
+    "category": { "zh": "主菜", "en": "Entrees" },
+    "name": { "zh": "东坡肉", "en": "Dongpo Pork" },
+    "description": { "zh": "五花肉慢炖至入口即化，酱香浓郁。", "en": "Pork belly slow-braised until melt-in-mouth, rich in sauce." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "主菜", "en": "Entree" },
+      { "zh": "酱香", "en": "Savory" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
+    "featured": false,
     "enabled": true,
-    "featured": false
+    "video_url": "https://www.bilibili.com/video/BV1ga4y1f7Zs"
   },
   {
     "id": "21",
-    "cuisine": "中餐主食",
-    "dish_name": "肉末烧茄子",
-    "description": "茄子软糯入味，搭配肉末，家常而温暖。",
-    "video_url": "https://www.bilibili.com/video/BV1n4411p7ja",
+    "category": { "zh": "配菜", "en": "Sides" },
+    "name": { "zh": "肉末烧茄子", "en": "Braised Eggplant with Minced Pork" },
+    "description": { "zh": "茄子软糯入味，搭配肉末，家常而温暖。", "en": "Eggplant braised with minced pork, homely and warming." },
+    "tags": [
+      { "zh": "中餐", "en": "Chinese" },
+      { "zh": "配菜", "en": "Side" },
+      { "zh": "下饭", "en": "Goes with Rice" }
+    ],
     "spiciness": 0,
     "sweetness": 0,
-    "enabled": true,
-    "featured": false
-  },
-  {
-    "id": "1",
-    "sweetness": 0,
-    "spiciness": 1,
-    "video_url": null,
-    "description": "薄切猪肉配蒜泥与红油调味，蒜香浓郁，口感清爽不腻。",
-    "cuisine": "川菜",
-    "enabled": true,
     "featured": false,
-    "dish_name": "蒜泥白肉"
-  },
-  {
-    "id": "2",
-    "sweetness": 0,
-    "spiciness": 0,
-    "video_url": null,
-    "description": "鲜虾泥填入青椒中煎制，虾肉弹嫩，清香微甜。",
-    "cuisine": "粤菜",
     "enabled": true,
-    "featured": false,
-    "dish_name": "青椒酿虾"
-  },
-  {
-    "id": "4",
-    "sweetness": 0,
-    "spiciness": 1,
-    "video_url": null,
-    "description": "手工宽面浇以热油与辣椒蒜香，面条筋道，香气十足。",
-    "cuisine": "中餐主食",
-    "enabled": true,
-    "featured": false,
-    "dish_name": "油泼面 / 扯面 / 宽面 / 粉"
-  },
-  {
-    "id": "5",
-    "sweetness": 0,
-    "spiciness": 0,
-    "video_url": null,
-    "description": "细腻顺滑的土豆泥，搭配咸香肉汁，口感柔软。",
-    "cuisine": "西餐前菜",
-    "enabled": true,
-    "featured": false,
-    "dish_name": "KFC土豆泥"
-  },
-  {
-    "id": "6",
-    "sweetness": 0,
-    "spiciness": 0,
-    "video_url": null,
-    "description": "炸鸡搭配金黄薯条，外酥里嫩，经典休闲组合。",
-    "cuisine": "西餐前菜",
-    "enabled": true,
-    "featured": false,
-    "dish_name": "鸡肉薯条"
-  },
-  {
-    "id": "7",
-    "sweetness": 0,
-    "spiciness": 0,
-    "video_url": null,
-    "description": "猪肘与酸菜慢炖，肉质软烂，酸香浓厚。",
-    "cuisine": "东北菜",
-    "enabled": true,
-    "featured": false,
-    "dish_name": "酸菜炖猪肘"
-  },
-  {
-    "id": "8",
-    "sweetness": 0,
-    "spiciness": 0,
-    "video_url": null,
-    "description": "河粉大火快炒，牛肉嫩滑，锅气十足。",
-    "cuisine": "粤菜",
-    "enabled": true,
-    "featured": false,
-    "dish_name": "干炒牛河"
-  },
-  {
-    "id": "9",
-    "sweetness": 0,
-    "spiciness": 0,
-    "video_url": null,
-    "description": "细面拌以葱油酱汁，香气纯粹，口味朴实。",
-    "cuisine": "江浙菜",
-    "enabled": true,
-    "featured": false,
-    "dish_name": "葱油面"
+    "video_url": "https://www.bilibili.com/video/BV1n4411p7ja"
   }
 ]

@@ -1,13 +1,14 @@
 export interface Dish {
   id: string;
-  cuisine: string;
-  dish_name: string;
-  description: string;
-  video_url: string | null;
+  category: { zh: string; en: string };
+  name: { zh?: string; en?: string };
+  description: { zh?: string; en?: string };
+  tags: { zh: string; en: string }[];
   spiciness: number;
   sweetness: number;
-  enabled: boolean;
   featured: boolean;
+  enabled: boolean;
+  video_url: string | null;
   isCustom?: boolean;
   isCustomBuilder?: boolean;
 }
@@ -22,6 +23,7 @@ export interface Order {
   timestamp: number;
   items: CartItem[];
   totalQuantity: number;
+  status?: 'Submitted' | 'Completed'; // Added optional status field
 }
 
 export type CartState = Record<string, number>; // dishId -> quantity
