@@ -73,8 +73,8 @@ export const CategoryDirectory: React.FC<CategoryDirectoryProps> = ({ categories
                         className={clsx(
                           "px-1.5 py-0.75 rounded-full border text-[0.7rem]",
                           selectedTag === tag.en
-                            ? "bg-slate-200 text-slate-800 border-slate-300"
-                            : "bg-slate-50 text-slate-600 border-slate-100 hover:bg-slate-100"
+                            ? "bg-slate-800 text-white border-slate-800"
+                            : "bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200"
                         )}
                       >
                         {(tag.zh === '主厨推荐' || tag.en === "Chef's Special") && (
