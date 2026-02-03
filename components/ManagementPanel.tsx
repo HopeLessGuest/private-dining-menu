@@ -141,6 +141,18 @@ export const ManagementPanel: React.FC<ManagementPanelProps> = ({ dishes, setDis
     return Array.from(tagsMap.values());
   }, [dishes]);
 
+  const tagCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    dishes.forEach((dish) => {
+      (dish.tags || []).forEach((tag) => {
+        const key = tag.en || tag.zh || '';
+        if (!key) return;
+        counts[key] = (counts[key] || 0) + 1;
+      });
+    });
+    return counts;
+  }, [dishes]);
+
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);
   };
@@ -463,6 +475,9 @@ export const ManagementPanel: React.FC<ManagementPanelProps> = ({ dishes, setDis
                     language={language}
                     allTags={allTags}
                     t={t}
+                    tagCounts={tagCounts}
+                    selectedTag={selectedTag}
+                    onTagSelect={onTagSelect}
                   />
                 ))}
               </div>
@@ -561,10 +576,13 @@ interface SortableCategorySectionProps {
   language: Language;
   allTags: { zh: string; en: string }[];
   t: any;
+  tagCounts: Record<string, number>; // Added
+  selectedTag: string | null; // Added
+  onTagSelect: (tag: string | null) => void; // Added
 }
 
 const SortableCategorySection: React.FC<SortableCategorySectionProps> = ({ 
-    category, dishes, editingId, setEditingId, onUpdate, onDelete, language, allTags, t 
+    category, dishes, editingId, setEditingId, onUpdate, onDelete, language, allTags, t, tagCounts, selectedTag, onTagSelect 
 }) => {
   const {
     attributes,
@@ -609,6 +627,9 @@ const SortableCategorySection: React.FC<SortableCategorySectionProps> = ({
                       language={language}
                       allTags={allTags}
                         t={t}
+                        tagCounts={tagCounts}
+                        selectedTag={selectedTag}
+                        onTagSelect={onTagSelect}
                      />
                  ))}
              </SortableContext>
@@ -626,9 +647,12 @@ interface SortableDishItemProps {
   language: Language;
   allTags: { zh: string; en: string }[];
   t: any;
+  tagCounts: Record<string, number>; // Added
+  selectedTag: string | null; // Added
+  onTagSelect: (tag: string | null) => void; // Added
 }
 
-const SortableDishItem: React.FC<SortableDishItemProps> = ({ dish, isEditing, onToggleEdit, onUpdate, onDelete, language, allTags, t }) => {
+const SortableDishItem: React.FC<SortableDishItemProps> = ({ dish, isEditing, onToggleEdit, onUpdate, onDelete, language, allTags, t, tagCounts, selectedTag, onTagSelect }) => {
   const [customTag, setCustomTag] = useState('');
 
   const tagLabel = language === 'zh' ? '标签' : 'Tags';
@@ -791,7 +815,7 @@ const SortableDishItem: React.FC<SortableDishItemProps> = ({ dish, isEditing, on
                                 type="number" 
                                 min="0" 
                                 max="5" 
-                                className="w-12 p-1 border border-slate-300 rounded" 
+                                className="w-12 h-12 bg-slate-100 text-slate-600 rounded-full shadow-lg flex items-center justify-center border border-slate-200 hover:bg-slate-200 hover:text-slate-800"
                                 value={dish.spiciness}
                                 onChange={e => {
                                   // Mutually exclusive: If setting spiciness, reset sweetness
@@ -806,7 +830,7 @@ const SortableDishItem: React.FC<SortableDishItemProps> = ({ dish, isEditing, on
                                 type="number" 
                                 min="0" 
                                 max="5" 
-                                className="w-12 p-1 border border-slate-300 rounded" 
+                                className="w-12 h-12 bg-slate-100 text-slate-600 rounded-full shadow-lg flex items-center justify-center border border-slate-200 hover:bg-slate-200 hover:text-slate-800"
                                 value={dish.sweetness || 0}
                                 onChange={e => {
                                   // Mutually exclusive: If setting sweetness, reset spiciness
