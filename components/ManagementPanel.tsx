@@ -141,6 +141,18 @@ export const ManagementPanel: React.FC<ManagementPanelProps> = ({ dishes, setDis
     return Array.from(tagsMap.values());
   }, [dishes]);
 
+  const tagCounts = useMemo<Record<string, number>>(() => {
+    const counts: Record<string, number> = {};
+    dishes.forEach((dish) => {
+      if (dish.enabled && dish.tags) {
+        dish.tags.forEach(tag => {
+          if (tag.en) counts[tag.en] = (counts[tag.en] || 0) + 1;
+        });
+      }
+    });
+    return counts;
+  }, [dishes]);
+
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);
   };
@@ -452,8 +464,8 @@ export const ManagementPanel: React.FC<ManagementPanelProps> = ({ dishes, setDis
             >
               <div className="space-y-4 pb-20">
                 {categoryObjects.map((category) => (
-                  <SortableCategorySection 
-                    key={category.en} 
+                  <SortableCategorySection
+                    key={category.en}
                     category={category}
                     dishes={dishes.filter(d => d.category.en === category.en)}
                     editingId={editingId}
@@ -462,6 +474,9 @@ export const ManagementPanel: React.FC<ManagementPanelProps> = ({ dishes, setDis
                     onDelete={handleDeleteDish}
                     language={language}
                     allTags={allTags}
+                    tagCounts={tagCounts}
+                    selectedTag={selectedTag}
+                    onTagSelect={onTagSelect}
                     t={t}
                   />
                 ))}
@@ -560,11 +575,14 @@ interface SortableCategorySectionProps {
   onDelete: (id: string) => void;
   language: Language;
   allTags: { zh: string; en: string }[];
+  tagCounts: Record<string, number>;
+  selectedTag: string | null;
+  onTagSelect: (tag: string | null) => void;
   t: any;
 }
 
-const SortableCategorySection: React.FC<SortableCategorySectionProps> = ({ 
-    category, dishes, editingId, setEditingId, onUpdate, onDelete, language, allTags, t 
+const SortableCategorySection: React.FC<SortableCategorySectionProps> = ({
+    category, dishes, editingId, setEditingId, onUpdate, onDelete, language, allTags, tagCounts, selectedTag, onTagSelect, t
 }) => {
   const {
     attributes,
@@ -599,15 +617,18 @@ const SortableCategorySection: React.FC<SortableCategorySectionProps> = ({
         <div className="p-2 space-y-2 bg-slate-50/30">
              <SortableContext items={dishes.map(d => d.id)} strategy={verticalListSortingStrategy}>
                  {dishes.map(dish => (
-                     <SortableDishItem 
+                     <SortableDishItem
                         key={dish.id}
                         dish={dish}
                         isEditing={editingId === dish.id}
                         onToggleEdit={() => setEditingId(editingId === dish.id ? null : dish.id)}
                         onUpdate={onUpdate}
                         onDelete={onDelete}
-                      language={language}
-                      allTags={allTags}
+                        language={language}
+                        allTags={allTags}
+                        tagCounts={tagCounts}
+                        selectedTag={selectedTag}
+                        onTagSelect={onTagSelect}
                         t={t}
                      />
                  ))}
@@ -625,10 +646,13 @@ interface SortableDishItemProps {
   onDelete: (id: string) => void;
   language: Language;
   allTags: { zh: string; en: string }[];
+  tagCounts: Record<string, number>;
+  selectedTag: string | null;
+  onTagSelect: (tag: string | null) => void;
   t: any;
 }
 
-const SortableDishItem: React.FC<SortableDishItemProps> = ({ dish, isEditing, onToggleEdit, onUpdate, onDelete, language, allTags, t }) => {
+const SortableDishItem: React.FC<SortableDishItemProps> = ({ dish, isEditing, onToggleEdit, onUpdate, onDelete, language, allTags, tagCounts, selectedTag, onTagSelect, t }) => {
   const [customTag, setCustomTag] = useState('');
 
   const tagLabel = language === 'zh' ? '标签' : 'Tags';
