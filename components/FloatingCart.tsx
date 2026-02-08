@@ -1,9 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { ShoppingCart, X, Trash2, Send, MessageSquareText, Check } from 'lucide-react';
-import { Dish, CartState, Language, NoteState } from '../types';
+import { Dish, CartState, Language, NoteState, DishCategory } from '../types';
 import { AnimatePresence, motion } from 'framer-motion';
-import { TRANSLATIONS } from '../constants';
-import { getLocalizedText } from '../utils';
+import { TRANSLATIONS, CATEGORY_TRANSLATIONS } from '../constants';
 
 interface FloatingCartProps {
   cart: CartState;
@@ -51,11 +50,10 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
   const cuisineStats = useMemo(() => {
     const stats: Record<string, number> = {};
     cartItems.forEach(item => {
-      const categoryKey = getLocalizedText(item.category, language);
-      stats[categoryKey] = (stats[categoryKey] || 0) + item.quantity;
+      stats[item.category] = (stats[item.category] || 0) + item.quantity;
     });
     return stats;
-  }, [cartItems, language]);
+  }, [cartItems]);
   
   const handleSend = () => {
     onPlaceOrder();
@@ -132,7 +130,7 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                           <div className="flex-1 pr-2">
                             <div className="flex items-center gap-2">
                                <div className="text-sm font-medium text-slate-800 line-clamp-1">
-                                  {getLocalizedText(item.name, language)}
+                                  {item.dish_name}
                                </div>
                                <button 
                                   onClick={() => startEditingNote(item.id, currentNote)}
@@ -205,9 +203,9 @@ export const FloatingCart: React.FC<FloatingCartProps> = ({
                   {/* Cuisine Stats (Moved here inside scrollable area) */}
                   <div className="pt-4 mt-2 border-t border-slate-100 border-dashed">
                       <div className="flex flex-wrap gap-x-3 gap-y-1 justify-center text-[10px] text-slate-400">
-                          {Object.entries(cuisineStats).map(([cuisine, count]) => (
-                              <span key={cuisine} className="bg-slate-100 px-1.5 py-0.5 rounded">
-                                  {cuisine} x{count}
+                          {Object.entries(cuisineStats).map(([cat, count]) => (
+                              <span key={cat} className="bg-slate-100 px-1.5 py-0.5 rounded">
+                                  {CATEGORY_TRANSLATIONS[cat as DishCategory]?.[language] || cat} x{count}
                               </span>
                           ))}
                       </div>

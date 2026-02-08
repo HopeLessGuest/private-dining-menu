@@ -1,23 +1,51 @@
-import { Dish } from './types';
-import defaultMenu from './defaultMenu.json';
 
-export const DISHES_PER_PAGE = 10;
+import { Dish, DishCategory } from './types';
+
+export const DISHES_PER_PAGE = 12;
+
+export const CATEGORY_ORDER: DishCategory[] = ['Appetizer', 'Soup', 'Main', 'Side', 'Staple', 'Custom'];
+
+export const DEFAULT_TAGS = [
+  "川菜", "湘菜", "粤菜", "清淡", "下饭", 
+  "蛋类", "咸鲜", "北美", "意大利", "北欧", 
+  "南亚", "北非", "甜味口", "酸辣", "素食"
+];
+
+export const CATEGORY_TRANSLATIONS: Record<DishCategory, { en: string; zh: string }> = {
+  Appetizer: { en: "Appetizers", zh: "前菜" },
+  Soup: { en: "Soups", zh: "汤" },
+  Main: { en: "Mains", zh: "主菜" },
+  Side: { en: "Sides", zh: "配菜" },
+  Staple: { en: "Staples", zh: "主食" },
+  Custom: { en: "Exclusive Custom Dish", zh: "专享定制菜" }
+};
 
 export const TRANSLATIONS = {
   en: {
-    restaurantName: "Savèurs d’Alan",
-    restaurantNameZh: "岚",
+    restaurantName: "Lumière",
+    restaurantNameZh: "光",
     seasonalMenu: "Seasonal Tasting Menu",
     chefsSpecial: "Chef's Special",
     yourSelection: "Your Selection",
     clear: "Clear",
     closeSelection: "Close Selection",
+    sendOrder: "Send Order",
+    orderHistory: "Order History",
+    noOrders: "No past orders.",
+    orderPlaced: "Order sent successfully!",
+    deleteOrderConfirm: "Are you sure you want to delete this order record?",
+    orderId: "Order #",
+    items: "items",
+    total: "Total",
+    delete: "Delete",
     personalList: "Alan's customized menu, exclusive for private use.",
     menuManagement: "Menu Management",
     addDish: "Add Dish",
     import: "Import",
     export: "Export",
-    cuisine: "Category",
+    category: "Category",
+    tags: "Tags",
+    addTag: "Add Tag...",
     dishName: "Dish Name",
     description: "Description...",
     videoUrl: "Video URL",
@@ -29,27 +57,55 @@ export const TRANSLATIONS = {
     noDishes: "No enabled dishes to display.",
     deleteConfirm: "Are you sure you want to delete this dish?",
     untitled: "Untitled",
-    newSection: "New Section",
     newDish: "New Dish",
     toggleVisibility: "Toggle Visibility",
     watchVideo: "Watch Video",
     thinking: "Thinking...",
-    aiPolish: "AI Polish"
+    aiPolish: "AI Polish",
+    importSummaryTitle: "Import Summary",
+    importSuccess: "Import Successful",
+    itemsAdded: "Added",
+    itemsUpdated: "Updated",
+    cuisineBreakdown: "Category Breakdown",
+    newBadge: "New",
+    updateBadge: "Upd",
+    close: "Close",
+    errorInvalidJson: "Invalid file format: Expected a JSON array of dishes.",
+    errorParsing: "Error parsing JSON file. Please check the file for syntax errors.",
+    customDishTitle: "Exclusive Custom Dish",
+    customDishNamePlaceholder: "Name of your custom dish request...",
+    customDishDescPlaceholder: "Specific requirements (e.g., ingredients, flavor)...",
+    addToCart: "Add to Cart",
+    addNote: "Add Note",
+    saveNote: "Save",
+    notePlaceholder: "Special requests...",
+    note: "Note"
   },
   zh: {
-    restaurantName: "Savèurs d’Alan",
-    restaurantNameZh: "岚",
+    restaurantName: "Lumière",
+    restaurantNameZh: "光",
     seasonalMenu: "季节性品鉴菜单",
     chefsSpecial: "主厨推荐",
     yourSelection: "已选菜品",
     clear: "清空",
     closeSelection: "关闭列表",
+    sendOrder: "发送订单",
+    orderHistory: "历史订单",
+    noOrders: "暂无历史订单。",
+    orderPlaced: "订单已发送！",
+    deleteOrderConfirm: "确定要删除这条订单记录吗？",
+    orderId: "订单号",
+    items: "件",
+    total: "共",
+    delete: "删除",
     personalList: "阿兰定制菜单，私人专享",
     menuManagement: "菜单管理",
     addDish: "添加菜品",
     import: "导入",
     export: "导出",
-    cuisine: "分类",
+    category: "分类",
+    tags: "标签",
+    addTag: "输入新标签...",
     dishName: "菜名",
     description: "描述...",
     videoUrl: "视频链接",
@@ -61,24 +117,30 @@ export const TRANSLATIONS = {
     noDishes: "暂无可用菜品。",
     deleteConfirm: "确定要删除这道菜吗？",
     untitled: "未命名",
-    newSection: "新分类",
     newDish: "新菜品",
     toggleVisibility: "切换可见性",
     watchVideo: "观看视频",
     thinking: "思考中...",
-    aiPolish: "AI 润色"
+    aiPolish: "AI 润色",
+    importSummaryTitle: "导入摘要",
+    importSuccess: "导入成功",
+    itemsAdded: "新增",
+    itemsUpdated: "更新",
+    cuisineBreakdown: "分类详情",
+    newBadge: "新",
+    updateBadge: "更",
+    close: "关闭",
+    errorInvalidJson: "文件格式无效：需要菜品 JSON 数组。",
+    errorParsing: "解析 JSON 文件出错。请检查文件语法。",
+    customDishTitle: "专享定制菜",
+    customDishNamePlaceholder: "输入您想定制的菜品名称...",
+    customDishDescPlaceholder: "具体要求（如：食材、口味偏好等）...",
+    addToCart: "加入购物车",
+    addNote: "添加备注",
+    saveNote: "保存",
+    notePlaceholder: "特殊要求...",
+    note: "备注"
   }
 };
 
-export const INITIAL_DISHES: Dish[] = defaultMenu.map((dish) => ({
-  id: dish.id,
-  category: dish.category,
-  name: dish.name,
-  description: dish.description,
-  tags: dish.tags ?? [],
-  spiciness: dish.spiciness,
-  sweetness: dish.sweetness,
-  featured: dish.featured,
-  enabled: dish.enabled,
-  video_url: dish.video_url
-}));
+export const INITIAL_DISHES: Dish[] = [];
